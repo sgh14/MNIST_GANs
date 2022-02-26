@@ -16,10 +16,10 @@ def get_classifier(input_shape):
 
     return classifier
 
-
+# @tf.function
 def train_classifier(classifier, dataset, batch_size=64, plot=True):
     validation_split = 0.2
-    dataset = dataset.batch(batch_size)
+    dataset = dataset.batch(batch_size)#, drop_remainder=True)
     dataset_size = dataset.cardinality().numpy()
     validation_dataset = dataset.take(int(validation_split*dataset_size)) 
     training_dataset = dataset.skip(int(validation_split*dataset_size))

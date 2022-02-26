@@ -1,3 +1,4 @@
+import tensorflow as tf
 from tensorflow.keras import layers
 from tensorflow.keras import models
 from tensorflow.keras import losses
@@ -51,10 +52,15 @@ def get_discriminator(input_shape):
 
 def get_discriminator_loss(loss_name='normal'):
     if loss_name == 'normal':
-        def discriminator_loss(labels, logits):
-            bce = losses.BinaryCrossentropy(from_logits=True)
-            loss = bce(labels, logits)
+        def discriminator_loss(batch_size, labels, logits):
+            batch_size = tf.cast(batch_size, tf.float32)
+            bce = losses.BinaryCrossentropy(from_logits=True, reduction=losses.Reduction.NONE)
+            loss = tf.reduce_sum(bce(labels, logits))*(1./batch_size)
 
             return loss
     
+    elif loss_name == 'WGP':
+        def discriminator_loss(real_img, fake_img): # TODO: esto está mal casi seguro
+            return tf.reduce_mean(fake_img) - tf.reduce_mean(real_img)
+
     return discriminator_loss

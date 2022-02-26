@@ -24,6 +24,6 @@ def load_data():
 
     # Create tf.data.Dataset.
     dataset = tf.data.Dataset.from_tensor_slices((all_digits, all_labels))
-    dataset = dataset.shuffle(buffer_size=1024)
-
+    dataset = dataset.shuffle(buffer_size=1024) #.batch(batch_size, drop_remainder=True) #.prefetch(1)
+    
     return dataset, data_features
