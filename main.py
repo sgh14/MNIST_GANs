@@ -65,7 +65,7 @@ gans.compile(
 #%% TRAIN GANS
 batch_size=64
 dataset = dataset.batch(batch_size, drop_remainder=True)
-gans.fit(dataset, epochs=5, verbose=1)
+gans.fit(dataset, epochs=10, verbose=1)
 
 #%% SAVE THE MODELS
 generator_path = os.path.join(models_dir, 'generator.h5')
