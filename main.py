@@ -51,8 +51,8 @@ generator_optimizer = optimizers.Adam(learning_rate=0.0002, beta_1=0.5, beta_2=0
 discriminator_optimizer = optimizers.Adam(learning_rate=0.0002, beta_1=0.5, beta_2=0.9) 
 
 # Get loss functions
-generator_loss = get_generator_loss('normal')
-discriminator_loss = get_discriminator_loss('normal')
+generator_loss = get_generator_loss()
+discriminator_loss = get_discriminator_loss()
 
 # Compile the GANs model.
 gans.compile(
